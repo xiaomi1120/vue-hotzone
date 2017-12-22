@@ -31,12 +31,12 @@ _.extend = (o1, o2, override = false) => {
  */
 _.checkUrl = (url, patternStr) => {
   let pattern = new RegExp(patternStr ||
-        '^((.*?:)?\\/\\/)' +                                    // 协议（有无协议皆可，不对协议类型做强校验）
-        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' +   // 域名
-        '((\\d{1,3}\\.){3}\\d{1,3}))' +                         // IP 地址
-        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' +                     // 端口和通道
-        '(\\?[\\d\\D]*)?' +                                     // 查询参数(允许一切字符)
-        '(\\#[-a-z\\d_]*)?$', 'ig')                            // 锚点
+    '^((.*?:)?\\/\\/)' +                                    // 协议（有无协议皆可，不对协议类型做强校验）
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' +   // 域名
+    '((\\d{1,3}\\.){3}\\d{1,3}))' +                         // IP 地址
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' +                     // 端口和通道
+    '(\\?[\\d\\D]*)?' +                                     // 查询参数(允许一切字符)
+    '(\\#[-a-z\\d_]*)?$', 'ig')                            // 锚点
   return pattern.test(url)
 }
 
@@ -119,21 +119,22 @@ _.getDistanceY = (e = {}, container = {}) => {
  *    thrFn();
  */
 _.throttle = function (fn, delay, debounce = false, immediate = false) {
-  let curr = +new Date(), // 当前时间
-    lastCall = 0,       // 最后一次调用
-    lastExec = 0,       // 最后一次执行
-    timer = null,       // 计时器timeout的ID
-    diff,               // 时间差
-    context,            // 函数执行上下文
-    args,               // 参数
-    exec = function () { // 执行器
-      lastExec = curr
-      fn.apply(context, args)
-    }
+  let curr = +new Date() // 当前时间
+  let lastCall = 0       // 最后一次调用
+  let lastExec = 0       // 最后一次执行
+  let timer = null       // 计时器timeout的ID
+  let diff               // 时间差
+  let context            // 函数执行上下文
+  let args               // 参数
+  let exec = function () { // 执行器
+    lastExec = curr
+    fn.apply(context, args)
+  }
+
   return function () {
     curr = +new Date()
     context = this
-        // eslint-disable-next-line prefer-rest-params
+    // eslint-disable-next-line prefer-rest-params
     args = arguments
     diff = curr - (debounce ? lastCall : lastExec) - delay
     timer && clearTimeout(timer)

@@ -228,70 +228,70 @@ display: none
 </style>
 
 <script>
-import Vue from "vue";
-// import template from "../components/view.html";
-// import Zone from './zone';
-import _ from "../assets/util";
+import Vue from 'vue'
+// import template from "../components/view.html"
+// import Zone from './zone'
+import _ from '../assets/util'
 // import directive from "../assets/directive";
-var HotZone= Vue.extend({
-  config(data) {
+var HotZone = Vue.extend({
+  config (data) {
     _.extend(data, {
       // 如果传入 itemClick 则该值为 true
       hasCallback: !!this._handles && !!this._handles.itemClick,
       isEdit: true,
-      config: {},
+      config: {}
     //   zones: []
-    });
-    this.supr(data);
+    })
+    this.supr(data)
   },
-  changeInfo(res) {
-    let { info, index } = res;
-    this.changeItem(info, index);
+  changeInfo (res) {
+    let { info, index } = res
+    this.changeItem(info, index)
   },
-  addItem(setting = {}) {
-    this.data.zones.push(setting);
-    this.$emit("add", setting);
-    this.hasChange();
+  addItem (setting = {}) {
+    this.data.zones.push(setting)
+    this.$emit('add', setting)
+    this.hasChange()
   },
-  eraseItem(index = this.data.zones.length - 1) {
-    this.$emit("erase", index);
-    this.removeItem(index);
+  eraseItem (index = this.data.zones.length - 1) {
+    this.$emit('erase', index)
+    this.removeItem(index)
   },
-  isOverRange() {
-    let { config = {}, zones = [] } = this.data;
-    return config.hasOwnProperty("maxNum") && zones.length > config.maxNum;
+  isOverRange () {
+    let { config = {}, zones = [] } = this.data
+    return config.hasOwnProperty('maxNum') && zones.length > config.maxNum
   },
-  overRange(index = this.data.zones.length - 1) {
-    this.$emit("overRange", index);
-    this.removeItem(index);
+  overRange (index = this.data.zones.length - 1) {
+    this.$emit('overRange', index)
+    this.removeItem(index)
   },
-  removeItem(index = this.data.zones.length - 1) {
-    this.data.zones.splice(index, 1);
-    this.$emit("remove", index);
-    this.hasChange();
+  removeItem (index = this.data.zones.length - 1) {
+    this.data.zones.splice(index, 1)
+    this.$emit('remove', index)
+    this.hasChange()
   },
-  setItem(index = this.data.zones.length - 1) {
-    this.$refs[`zone_${index}`].setInfo();
+  setItem (index = this.data.zones.length - 1) {
+    this.$refs[`zone_${index}`].setInfo()
   },
-  changeItem(info = {}, index = this.data.zones.length - 1) {
-    Object.assign(this.data.zones[index], info);
-    this.hasChange();
+  changeItem (info = {}, index = this.data.zones.length - 1) {
+    Object.assign(this.data.zones[index], info)
+    this.hasChange()
   },
-  hasChange() {
-    this.$emit("change", this.data.zones);
-    this.$update();
+  hasChange () {
+    this.$emit('change', this.data.zones)
+    this.$update()
   },
-  itemClick(index) {
-    this.$emit("itemClick", index);
+  itemClick (index) {
+    this.$emit('itemClick', index)
   },
-  getInfo() {
-    return this.data.zones;
+  getInfo () {
+    return this.data.zones
   }
 })
 // .directive(directive)
 // Vue.component('Zone',Zone);
 // HotZone.Zone=Zone;
 export default{
-HotZone
+  HotZone
 }
 </script>
