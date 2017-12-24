@@ -2,7 +2,7 @@
  * 改变元素宽高 directive
  * @param {Object} elem
  */
-import { dom } from 'regularjs'
+import { dom } from 'vue'
 import operations from '../operations'
 import _ from '../util'
 

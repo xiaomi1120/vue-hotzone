@@ -2,7 +2,7 @@
  * 拖拽元素 directive
  * @param {Object} elem
  */
-import { dom } from 'regularjs'
+import { dom } from 'vue'
 import _ from '../util'
 
 export default function dragItem (elem) {

@@ -2,7 +2,7 @@
  * 生成元素 directive
  * @param {Object} content
  */
-import { dom } from 'regularjs'
+import { dom } from 'vue'
 import * as Constant from '../constant'
 import operations from '../operations'
 import _ from '../util'
