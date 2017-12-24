@@ -1,42 +1,46 @@
 <template>
-<HotZone
-                           
-                        ></HotZone>
-      <!-- <img src="http://haitao.nos.netease.com/EbrC2L4UuXFI1CPmWall%20o207T1705221905_1920_1080.jpg" alt=""> -->
+<div id="box">
+<HotZone v-bind:src='image'
+          v-bind:zones='zones'
+          v-if="isEdit"
+          v-on:erase='erase($event)'
+          v-on:change='change($event)'
+></HotZone>
+</div>
 </template>
 
 <script>
-import Vue from 'vue'
-// import HotZone from './components/HotZone'
-
+import Vue from 'vue';
+import HotZone from './components/HotZone'
 export default Vue.extend({
-  template: {
-    // HotZone
+  components:{
+    HotZone
   },
-  data: function () {
+  data:function() {
     return {
-      msg: '这是一个组件例子',
-      i: 1,
-      image: ''
-    }
-  },
-  config: function (data) {
-    Object.assign(data, {
-      image:
-        'http://haitao.nos.netease.com/EbrC2L4UuXFI1CPmWall%20o207T1705221905_1920_1080.jpg',
+     image:
+        "http://haitao.nos.netease.com/EbrC2L4UuXFI1CPmWall%20o207T1705221905_1920_1080.jpg",
       zones: [],
       config: {
         pattern: 'www.kaola.com'
       },
       isEdit: true
-    })
-    this.supr(data)
+    }
   },
-  erase: function (index) {
-    console.log('erase!index:', index)
+  // config: function(data) {
+  //   Object.assign(data, {
+   
+  //   });
+  //   this.methods(data);
+  // },
+  methods:{
+  erase: function(index) {
+    console.log("erase!index:", index);
   },
-  change: function () {
-    console.log('changed!')
+  change: function() {
+    console.log("changed!");
   }
-})
+  }
+
+});
 </script>

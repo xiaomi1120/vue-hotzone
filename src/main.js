@@ -5,18 +5,18 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import HotZone from './components/HotZone'
-// import router from './router'
+// import HotZone from './components/HotZone'
+import router from './router'
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#box',
-  // router,
-  template: '<HotZone/>',
+  router,
+  template: '<App/>',
   components: {
-    App,
-    HotZone
+    App
+    // HotZone
   }
 })

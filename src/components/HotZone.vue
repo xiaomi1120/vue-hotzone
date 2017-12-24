@@ -1,29 +1,12 @@
 <template>
-<div v-if="image">
-    <div class="hz-m-wrap"  v-bind:class="{'hz-m-view': !isEdit}" v-resize>
-        <img class="hz-u-img" src="" >
-        <ul class="hz-m-area" v-if="isEdit">
-     
-            <Zone
-              v-for="(item, item_index) in zones"
-  v-bind:item="item"
-  v-bind:index="item_index"
-  v-bind:key="item.id"
-            class="hz-m-item"
-            isEdit={isEdit}
-            config={config}
-            hasCallback={hasCallback}
-            ref={'zone_' + item_index}
-            setting={zones[item_index]}
-            on-delItem={this.removeItem($event)}
-            on-itemClick={this.itemClick($event)}
-            on-changeInfo={this.changeInfo($event)}
-        ></Zone>                           
-        </ul>
+<div class="hz-m-wrap {class}"  v-bind:class="{ 'hz-m-view': !isEdit }" v-on:erase='erase($event)'>
+    <img class="hz-u-img" v-bind:src='image' />
 
-    </div>
 </div>
+
 </template>
+
+
 <style scoped>
   /*overflow: hidden;*/
 .hz-m-wrap {position: relative}
@@ -232,18 +215,30 @@ import Vue from 'vue'
 // import template from "../components/view.html"
 // import Zone from './zone'
 import _ from '../assets/util'
+// import VueRouter from 'vue-router'
+// Vue.use(VueRouter);
 // import directive from "../assets/directive";
 var HotZone = Vue.extend({
-  config (data) {
-    _.extend(data, {
-      // 如果传入 itemClick 则该值为 true
-      hasCallback: !!this._handles && !!this._handles.itemClick,
-      isEdit: true,
-      config: {}
-    //   zones: []
-    })
-    this.supr(data)
-  },
+//   data:function() {
+//     return{
+//  // 如果传入 itemClick 则该值为 true
+//       hasCallback: !!this._handles && !!this._handles.itemClick,
+//       isEdit:true,
+//       config: {}
+//     //   zones: []
+//     }
+
+//   },
+   config(data) {
+        _.extend(data, {
+            // 如果传入 itemClick 则该值为 true
+            hasCallback: !!this._handles && !!this._handles.itemClick,
+            isEdit: true,
+            config: {},
+            zones: []
+        });
+        this.props(data);
+    },
   changeInfo (res) {
     let { info, index } = res
     this.changeItem(info, index)
@@ -288,7 +283,9 @@ var HotZone = Vue.extend({
     return this.data.zones
   }
 })
+//  Vue.component('HotZone',HotZone) 
 // .directive(directive)
+
 // Vue.component('Zone',Zone);
 // HotZone.Zone=Zone;
 export default{
